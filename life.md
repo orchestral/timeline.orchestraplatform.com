@@ -2,5 +2,7 @@ Orchestra Platform Timeline
 ===============
 
 - 25/06/2012 [Initial commit](https://github.com/orchestral/orchestra/commit/76b90cf2de3ce3f8415cbd93eb10f2eeacfc67c0).
-- 27/01/2013 Released version 1.0.
-- 01/03/2013 Released version 1.1.
+- 27/01/2013 Released v1.0.0.
+- 01/03/2013 Released v1.1.0.
+- 20/06/2013 [Released v2.0.0](http://orchestraplatform.com/docs/latest/changes#v2-0-0).
+- 20/06/2013-20/06/2013 Maintenance/Support period for v2.0.x.
