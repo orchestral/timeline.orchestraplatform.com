@@ -90,10 +90,22 @@ h1{
 	margin-right: 10px;
 	opacity: .3;
 	position: relative;
-	left: -2px;
+	left: -2px;5
 }
 #life .event:hover .time{
-	opacity: .5;
+	opacity: .;
+}
+#life #today {
+	border: 2px solid red;
+	border-radius: 4px;
+	opacity: 0.85;
+	background-color: red;
+	opacity: 0.25;
+	height: 100%;
+    width: 1px;
+    position: absolute;
+    top: 32px;
+    left: 0px;
 }
 </style>
 <header>
@@ -292,6 +304,7 @@ h1{
 
 			// Get the first and last year for the year axis
 			var firstYear = new Date().getFullYear();
+			var thisYear = firstYear;
 			var lastYear = firstYear;
 			data.forEach(function(d){
 				var time = d.time;
@@ -306,6 +319,7 @@ h1{
 			data.forEach(function(d){
 				html += life.renderEvent(d);
 			});
+			html += life.renderToday(thisYear);
 			life.$el.innerHTML = html;
 		}
 	};
