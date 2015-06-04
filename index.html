@@ -96,16 +96,12 @@ h1{
 	opacity: .;
 }
 #life #today {
-	border: 2px solid red;
-	border-radius: 4px;
-	opacity: 0.85;
-	background-color: red;
-	opacity: 0.25;
+	background-color: #333;
+	opacity: 0.2;
 	height: 100%;
-    width: 1px;
+    width: 3px;
     position: absolute;
-    top: 32px;
-    left: 0px;
+    top: 0;
 }
 </style>
 <header>
@@ -285,16 +281,25 @@ h1{
 				+ '</div>';
 			return '';
 		},
-		renderYears: function(firstYear, lastYear){
+		renderYears: function(today, firstYear, lastYear){
 			var dayLength = life.config.yearLength/12/30;
 			var html = '';
 			var days = 0;
+			var totalDays = 365;
 			var hideAge = life.config.hideAge;
+			console.log(today.getMonth());
 			for (var y=firstYear, age = 0; y<=lastYear+1; y++, age++){
 				html += '<section class="year" style="left: ' + (days*dayLength).toFixed(2) + 'px">'
 					+ y + (hideAge ? '' : (' (' + age + ')'))
 					+ '</section>';
-				days += (y % 4 == 0) ? 366 : 365;
+
+				totalDays = (y % 4 == 0) ? 366 : 365;
+
+				if ((y + 1) == today.getFullYear()) {
+					html += '<div id="today" style="left: ' + ((days*dayLength)+((totalDays/12)*(today.getMonth()+1))).toFixed(2) + 'px"></div>';
+				}
+
+				days += totalDays;
 			}
 			return html;
 		},
@@ -304,7 +309,7 @@ h1{
 
 			// Get the first and last year for the year axis
 			var firstYear = new Date().getFullYear();
-			var thisYear = firstYear;
+			var today = new Date();
 			var lastYear = firstYear;
 			data.forEach(function(d){
 				var time = d.time;
@@ -315,11 +320,10 @@ h1{
 			});
 			life.firstYear = firstYear;
 
-			var html = life.renderYears(firstYear, lastYear);
+			var html = life.renderYears(today, firstYear, lastYear);
 			data.forEach(function(d){
 				html += life.renderEvent(d);
 			});
-			html += life.renderToday(thisYear);
 			life.$el.innerHTML = html;
 		}
 	};
